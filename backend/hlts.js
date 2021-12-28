@@ -5,6 +5,10 @@ require('dotenv').config()
 //console.log(process.env);
 apiKey = process.env.API_KEY 
 const steam = new SteamAPI(apiKey);
-//steam.resolve('https://steamcommunity.com/id/ILOOVEYOU').then(id = steamid)
-//console.log(steamid) 
+const steamid =steam.resolve('https://steamcommunity.com/id/ILOOVEYOU').then(id => { 
+console.log(id)     
+ steamid = id 
+//console.log(steamid)
+})
+console.log(steamid) 
 //hltbService.search('Kingdom Hearts').then(result => console.log(result));
