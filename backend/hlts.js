@@ -6,3 +6,4 @@ require('dotenv').config()
 //hltbService.search('Kingdom Hearts').then(result => console.log(result));
 const apikey = process.env.API_KEY; 
 const steamid = "76561198976808628"
+console.log("Test"); 
