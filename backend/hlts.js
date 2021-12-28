@@ -5,7 +5,7 @@ require('dotenv').config()
 //console.log(process.env);
 apiKey = process.env.API_KEY 
 const steam = new SteamAPI(apiKey);
-const steamid =steam.resolve('https://steamcommunity.com/id/ILOOVEYOU').then(id => { 
+var steamid =steam.resolve('https://steamcommunity.com/id/ILOOVEYOU').then(id => { 
 console.log(id)     
  steamid = id 
 //console.log(steamid)
