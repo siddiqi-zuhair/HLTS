@@ -1,5 +1,10 @@
 {
   "dependencies": {
-    "howlongtobeat": "^1.5.0"
+    "dotenv": "^10.0.0",
+    "howlongtobeat": "^1.5.0",
+    "jquery": "^3.6.0",
+    "jsdom": "^19.0.0",
+    "node-fetch": "^2.6.6",
+    "steamapi": "^2.2.0"
   }
 }
