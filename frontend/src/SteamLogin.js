@@ -13,9 +13,11 @@ const [apiReq,setAPI] = useState("")
    const handleSubmit= e =>{
    e.preventDefault() 
     setURL(steamURL.current.value) 
-       axios.post(url, {'STEAMURL':steam})
-       .then(response=>{ 
-           setAPI(JSON.stringify(response.data)) 
+    axios.post(url, {'STEAMURL':steam})
+       .then(response=>{
+           var APISetter = JSON.stringify(response.data[0])
+           APISetter = APISetter.substring(1,APISetter.length-1) 
+           setAPI(APISetter) 
        })
        .catch(error => {
            console.log(error)
@@ -29,11 +31,10 @@ const [apiReq,setAPI] = useState("")
         justifyContent: 'center',
     }}>
               <label>
-                  <TextField defaultValue="Steam URL" inputRef={steamURL} />
+                  <TextField defaultValue="http://steamcommunity.com/id/Chujji" inputRef={steamURL} />
 
               </label>
               <Button variant="contained" onClick={handleSubmit}>Enter</Button> 
-              {steam} 
               {apiReq}
       </div> 
     );
