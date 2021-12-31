@@ -1,31 +1,41 @@
 var express = require("express"); 
 var router=express.Router(); 
-
 router.get("/", async function(req,res){ 
     sendArr = await getData() 
+    console.log(sendArr)
+    console.log(sendArr[0].name)
     res.send(sendArr);
-}); 
+});
+router.post("/", async function(req,res){
+   var steamURL = JSON.parse(JSON.stringify(req.body.STEAMURL))
+   console.log(steamURL)
+   data = await getData(steamURL);
+   console.log(data)
+   res.send(data)
+});
 module.exports=router; 
 
- async function getData(){ 
+ async function getData(steamURL){ 
  let hltb = require('howlongtobeat');
      let hltbService = new hltb.HowLongToBeatService();
      const SteamAPI = require('steamapi');
     require('dotenv').config()
 
-    apiKey = '416B1421E0EA403BA18B9D6F4977E010'
+    apiKey = process.env.API_KEY 
     console.log(apiKey)
+    console.log(steamURL) 
     const steam = new SteamAPI(apiKey);
-    var steamid = await steam.resolve('https://steamcommunity.com/id/ILOOVEYOU') 
+    var steamid = await steam.resolve(steamURL) 
+    console.log(steamid) 
     gameList = await steam.getUserOwnedGames(steamid)
     console.log(gameList.length) 
     gameItemArray = [] 
     hltbGame = [] 
-    for(let i=0;i<gameList.length;i++){
+    for(let i=0;i<25;i++){
         hltbGame = await hltbService.search(gameList[i].name)
         console.log(hltbGame.length) 
         if(hltbGame.length!=0){
-            gameItemArray.push(new game(hltbGame[0].name,gameList[i].playTime/60,hltbGame[0].gameplayMain,hltbGame[0].gameplayMainExtra,hltbGame[0].gameCompletionist,"howlongtobeat.com/"+hltbGame[0].imageUrl))
+            gameItemArray.push(new game(hltbGame[0].name,Math.round(gameList[i].playTime/60),hltbGame[0].gameplayMain,hltbGame[0].gameplayMainExtra,hltbGame[0].gameCompletionist,"howlongtobeat.com/"+hltbGame[0].imageUrl))
         }
         //if(gameItemArray.length>=25){
           //  break; 
