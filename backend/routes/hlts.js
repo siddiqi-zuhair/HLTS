@@ -1,16 +1,22 @@
 var express = require("express"); 
 var router=express.Router(); 
-router.get("/", async function(req,res){ 
-    sendArr = await getData() 
-    console.log(sendArr)
-    console.log(sendArr[0].name)
-    res.send(sendArr);
-});
+// router.get("/", async function(req,res){ 
+//     sendArr = await getData() 
+//     console.log(sendArr)
+//     console.log(sendArr[0].name)
+//     res.send(sendArr);
+// });
 router.post("/", async function(req,res){
    var steamURL = JSON.parse(JSON.stringify(req.body.STEAMURL))
    console.log(steamURL)
+   console.log(steamURL.substring(0,29)) 
+   if(steamURL.includes("http://steamcommunity.com/id/")){
    data = await getData(steamURL);
-   console.log(data)
+   console.log("swag")
+   }else{
+       data = 'URL invalid! Try again!'
+       console.log(data) 
+   }
    res.send(data)
 });
 module.exports=router; 
@@ -20,15 +26,12 @@ module.exports=router;
      let hltbService = new hltb.HowLongToBeatService();
      const SteamAPI = require('steamapi');
     require('dotenv').config()
-
-    apiKey = process.env.API_KEY 
-    console.log(apiKey)
     console.log(steamURL) 
+    apiKey = process.env.API_KEY 
     const steam = new SteamAPI(apiKey);
     var steamid = await steam.resolve(steamURL) 
     console.log(steamid) 
     gameList = await steam.getUserOwnedGames(steamid)
-    console.log(gameList.length) 
     gameItemArray = [] 
     hltbGame = [] 
     for(let i=0;i<25;i++){
