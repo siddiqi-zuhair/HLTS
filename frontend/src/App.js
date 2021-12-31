@@ -1,26 +1,22 @@
+import React from 'react';
 import './App.css';
-import React from 'react' 
-class App extends React.Component{ 
-  consturctor(props){
-    super(props); 
-    this.state={apiResponse:""};
-  }
-  callAPI(){
-    fetch("http://localhost:9000/hlts")
-    .then(res=>res.text())
-    .then(res=>this.setState({apiResponse:res}))
-  }
-  componentWillMount(){
-    this.callAPI(); 
-  }
-  render(){
-    return{ 
-      <div className="App">
-      <header className="App-header"></header>
-      <p>{this.state.apiResponse}</p>
-        </div> 
-    }
-  }
-}
+import SteamLogin from './SteamLogin.js'
 
+class App extends React.Component { 
+ constructor(props){ 
+  super(props) 
+    this.state={apiResponse:""}; 
+  this.steamURL = ''; 
+  this.steam = ''; 
+}
+render(){ 
+  return (
+    <div  style={{
+      display: 'flex',  justifyContent:'center', alignItems:'center', height: '100vh'
+  }}>
+  <SteamLogin /> 
+    </div > 
+  );
+}
+}
 export default App;
