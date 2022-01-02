@@ -10,7 +10,7 @@ router.post("/", async function(req,res){
    var steamURL = JSON.parse(JSON.stringify(req.body.STEAMURL))
    console.log(steamURL)
    console.log(steamURL.substring(0,29)) 
-   if(steamURL.includes("http://steamcommunity.com/id/") || steamURL.includes("https://steamcommunity.com/id")){
+   if(steamURL.includes("http://steamcommunity.com/id/") || steamURL.includes("https://steamcommunity.com/id") || steamURL.includes("https://steamcommunity.com/profiles/")){
    data = await getData(steamURL);
    console.log("swag")
    }else{
@@ -34,7 +34,7 @@ module.exports=router;
     gameList = await steam.getUserOwnedGames(steamid)
     gameItemArray = [] 
     hltbGame = [] 
-    for(let i=0;i<25;i++){
+    for(let i=0;i<gameList.length;i++){
         hltbGame = await hltbService.search(gameList[i].name)
         console.log(hltbGame.length) 
         if(hltbGame.length!=0){

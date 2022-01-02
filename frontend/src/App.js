@@ -12,12 +12,7 @@ class App extends React.Component {
 }
 render(){ 
   return (
-    <div  style={{
-      display: 'flex',  justifyContent:'center', alignItems:'center', height: '100vh', fontFamily:'Roboto', fontWeight:'bold', backgroundColor:'#89CFF0', backgroundRepeat:true, backgroundSize: 'cover',
-
-  }}>
   <SteamLogin /> 
-    </div > 
   );
 }
 }
