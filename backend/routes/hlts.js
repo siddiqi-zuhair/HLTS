@@ -10,11 +10,11 @@ router.post("/", async function(req,res){
    var steamURL = JSON.parse(JSON.stringify(req.body.STEAMURL))
    console.log(steamURL)
    console.log(steamURL.substring(0,29)) 
-   if(steamURL.includes("http://steamcommunity.com/id/")){
+   if(steamURL.includes("http://steamcommunity.com/id/") || steamURL.includes("https://steamcommunity.com/id")){
    data = await getData(steamURL);
    console.log("swag")
    }else{
-       data = 'URL invalid! Try again!'
+       data = 'URL invalid! Try again! URL was'+steamURL
        console.log(data) 
    }
    res.send(data)
@@ -38,13 +38,13 @@ module.exports=router;
         hltbGame = await hltbService.search(gameList[i].name)
         console.log(hltbGame.length) 
         if(hltbGame.length!=0){
-            gameItemArray.push(new game(hltbGame[0].name,Math.round(gameList[i].playTime/60),hltbGame[0].gameplayMain,hltbGame[0].gameplayMainExtra,hltbGame[0].gameCompletionist,"howlongtobeat.com/"+hltbGame[0].imageUrl))
+            gameItemArray.push(new game(hltbGame[0].name,Math.round(gameList[i].playTime/60),hltbGame[0].gameplayMain,hltbGame[0].gameplayMainExtra,hltbGame[0].gameCompletionist,"http://howlongtobeat.com"+hltbGame[0].imageUrl))
         }
         //if(gameItemArray.length>=25){
           //  break; 
         }
      
-    console.log('PogU')
+    console.log(gameItemArray[0].image)
     return gameItemArray
 }
 
