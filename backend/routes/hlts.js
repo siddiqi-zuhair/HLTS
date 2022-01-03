@@ -27,10 +27,12 @@ module.exports=router;
     gameItemArray = [] 
     hltbGame = [] 
     for(let i=0;i<gameList.length;i++){
-        gameName = gameList[i].name.replace(/[^\w\s]/gi, '')
+        gameName = gameList[i].name.replace(/[^\w\s]/gi, ' ')
+        console.log(gameName) 
         hltbGame = await hltbService.search(gameName)
+        
         if(hltbGame.length>0){
-             
+            console.log(gameName)     
             gameItemArray.push(new game(gameList[i].name,Math.round(gameList[i].playTime/60),hltbGame[0].gameplayMain,hltbGame[0].gameplayMainExtra,hltbGame[0].gameplayCompletionist,"http://howlongtobeat.com"+hltbGame[0].imageUrl))
         }
         console.log(i+1 + "/"+gameList.length) 
