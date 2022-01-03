@@ -120,7 +120,7 @@ function SteamLogin() {
     } 
     return(
       <React.Fragment>
-         <Snackbar autoHideDuration={6000} onClose={handleClose2} open={open2} anchorOrigin={{horizontal:'left', vertical:'top'}} severity='info'>
+         <Snackbar onClose={handleClose2} open={open2} anchorOrigin={{horizontal:'left', vertical:'top'}} severity='info'>
         <Alert onClose={handleClose2} sx={{ width: '100%' }} severity='info'  >
           You've played {totalPlayTime} hours of games!  
           To beat all your games it would take {totalTimeToBeat} hours! 
