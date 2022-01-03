@@ -9,6 +9,7 @@ import { Typography } from '@mui/material';
 import { Alert } from '@mui/material';
 import { Snackbar } from '@mui/material';
 import { CircularProgress } from '@mui/material';
+import './App.css';
 
 
 function SteamLogin() {
@@ -55,23 +56,23 @@ function SteamLogin() {
     };
       if(bool === 0){
     return (
-     <React.Fragment>
+     <React.Fragment style={{fontFamily:'Ubuntu'}}>
         <Snackbar open={open ? true : false} autoHideDuration={6000} onClose={handleClose} in={open}>
         <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
           <AlertTitle>URL error</AlertTitle>
           You have typed an invalid URL 
           </Alert> 
         </Snackbar>
-      <div style={{display: 'flex',  justifyContent:'center', alignItems:'center', backgroundSize: 'cover', overflowY: 'scroll', height:'100vh', backgroundColor:'#85DCBA',fontSize:'8vw'}}>
+      <div style={{display: 'flex',  justifyContent:'center', alignItems:'center', backgroundSize: 'cover', overflowY: 'scroll', height:'100vh', backgroundColor:'#85DCBA',fontSize:'8vw',fontFamily:'Ubuntu'}}>
     
-              <TextField label='Steam Account ID' placeholder="http://steamcommunity.com/id/Chujji" variant='standard' size='medium' style={{  border: 0,outline:'none',boxShadow: 'none',}} autoComplete='off' inputRef={steamURL} />
+              <TextField label='Steam Account URL' placeholder="" variant='standard' size='medium' style={{  border: 0,outline:'none',boxShadow: 'none',fontFamily:'Ubuntu'}} autoComplete='off' inputRef={steamURL} />
               <Button variant="outlined" size='medium' style={{borderRadius:100, height:55 }} onClick={handleSubmit}>CALCULATE</Button>
       </div>  
       </React.Fragment>
     );
   }else if (bool === 1){
     return (
-      <div style={{display: 'flex',  justifyContent:'center', alignItems:'center', backgroundSize: 'cover', overflowY: 'scroll',height:'100vh', backgroundColor:'#85DCBA' }}> 
+      <div style={{display: 'flex',  justifyContent:'center', alignItems:'center', backgroundSize: 'cover', overflowY: 'scroll',height:'100vh', backgroundColor:'#85DCBA',fontFamily:'Ubuntu'}}> 
       <CircularProgress />
     </div>  
     ); 
@@ -95,13 +96,13 @@ function SteamLogin() {
           var completeStr = '  Complete: '+apiReq[i].howLongComplete+' hours'
       //    }
       gameCards.push( 
-        <div style={{display:'flex', justifyContent:'center', alignItems:'center', marginBottom:'20px', marginTop:'20px'}}>
-      <Card style={{backgroundColor:'#467361', borderRadius:25, }}>
+        <div style={{display:'flex', justifyContent:'center', alignItems:'center', marginBottom:'20px', marginTop:'20px', fontFamily:'Ubuntu'}}>
+      <Card style={{backgroundColor:'#467361', borderRadius:25, maxHeight:625, marginLeft:'auto', marginRight:'auto' }}>
         <CardContent style={{}}>
-          <Typography style={{textAlign:'center', color:'white', maxWidth:300}} component='div' variant='title' sx={{fontSize:30}}>
+          <Typography style={{textAlign:'center', color:'white', maxWidth:300}} component='div' variant='title' sx={{fontSize:27, fontWeight:'bold'}}>
               <strong>{apiReq[i].name}</strong>
           </Typography>
-          <Typography component='div'style={{textAlign:'center', color:'white' }} variant='subtitle1'sx={{fontSize:15}} >
+          <Typography component='div'style={{textAlign:'center', color:'white' }} variant='subtitle1'sx={{fontSize:14}} >
           Playtime: {apiReq[i].playTime} hours 
               <br/>
               {howLongStr} 
@@ -110,7 +111,7 @@ function SteamLogin() {
               <br/> 
               {completeStr}
           </Typography>
-              <CardMedia component='img' image={JSON.stringify(apiReq[i].image).substring(1,JSON.stringify(apiReq[i].image).length-1)}style={{width:300, height:450, overflow:'hidden'}}/>
+              <CardMedia component='img' image={JSON.stringify(apiReq[i].image).substring(1,JSON.stringify(apiReq[i].image).length-1)}style={{width:300, height:450, overflow:'hidden', borderRadius:25}}/>
         </CardContent>
       </Card>
     
