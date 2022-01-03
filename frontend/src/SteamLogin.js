@@ -7,9 +7,10 @@ import Card from '@mui/material/Card';
 import { CardContent } from '@mui/material';
 import { Typography } from '@mui/material';
 
-function SteamLogin(props) {
+
+function SteamLogin() {
     var steamURL = React.useRef(null);
-    const url = 'http://localhost:9000/hlts';
+    const url = 'http://192.168.86.53:9000/hlts';
     var axios = Axios;
 const [apiReq,setAPI] = useState("") 
 const [bool,setBool] = useState(0) 
@@ -36,37 +37,38 @@ const [bool,setBool] = useState(0)
     );
   }else if (bool === 1){
     return (
-      <div style={{display: 'flex',  justifyContent:'center', alignItems:'center', backgroundSize: 'cover', overflowY: 'scroll',height:'100vh', backgroundColor:'#85DCBA' }}> 
+      <div style={{display: 'flex',  justifyContent:'center', alignItems:'center', backgroundSize: 'cover', overflowY: 'scroll',height:'100vh', backgroundColor:'#00695C' }}> 
         <img src='https://i.imgur.com/muRT0BS.gif' style={{width:100,height:100}}></img>
     </div>  
     ); 
   }else if(bool===2){
-    var indents = [];
+    var gameCards = [];
     for(let i=0;i<apiReq.length;i++){
-      indents.push( 
-        <div>
-      <Card>
+      gameCards.push( 
+        <div style={{display:'flex', justifyContent:'center', alignItems:'center', marginBottom:'20px', marginTop:'20px'}}>
+      <Card style={{backgroundColor:'#424242'}}>
         <CardContent>
-          <Typography>
-              Game Name: {apiReq[i].name}
+          <Typography style={{textAlign:'center', color:'white'}}>
+              Name: {apiReq[i].name}
               <br/>
-              Your playtime: {apiReq[i].playTime} hours 
+              Playtime: {apiReq[i].playTime} hours 
               <br/>
-              How long to beat: {apiReq[i].howLong} hours
+              HLTB Main: {apiReq[i].howLong} hours
               <br/>
+              HLTB Main+Extra: {apiReq[i].howLongPlus} hours
+              <br/> 
+              HLTB Completionist: {apiReq[i].howLongComplete} hours
           </Typography>
               <img src={JSON.stringify(apiReq[i].image).substring(1,JSON.stringify(apiReq[i].image).length-1)}style={{width:300, height:450}}></img>
         </CardContent>
       </Card>
-
+    
       </div>
     )
-    }
-    console.log(indents) 
+    } 
     return(
-      <div style={{display: 'flex',  justifyContent:'center', alignItems:'center', backgroundSize: 'cover', overflowY: 'scroll', backgroundColor:'#85DCBA'}}>
-       {indents}; 
-       {console.log(indents.length)}
+      <div style={{display: 'block',  justifyContent:'center', alignItems:'center', backgroundSize: 'cover', overflowY: 'scroll', backgroundColor:'#00695C'}}>
+       {gameCards}; 
        </div> 
     )
   
