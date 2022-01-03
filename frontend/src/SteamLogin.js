@@ -4,10 +4,12 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';  
 import Axios from "axios";
 import Card from '@mui/material/Card';
-import { AlertTitle, CardContent } from '@mui/material';
+import { AlertTitle, CardContent, CardMedia } from '@mui/material';
 import { Typography } from '@mui/material';
 import { Alert } from '@mui/material';
 import { Snackbar } from '@mui/material';
+import { CircularProgress } from '@mui/material';
+
 
 function SteamLogin() {
     var steamURL = React.useRef(null);
@@ -16,6 +18,8 @@ function SteamLogin() {
     var totalPlayTime = 0; 
     var totalTimeToBeat=0; 
   const [open, setOpen] = React.useState(false);
+  const [open2, setOpen2] = React.useState(true);
+
   const [apiReq,setAPI] = useState("") 
   const [bool,setBool] = useState(0) 
    const handleSubmit= e =>{    
@@ -42,6 +46,13 @@ function SteamLogin() {
   
       setOpen(false);
     };
+    const handleClose2 = (event, reason) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+  
+      setOpen2(false);
+    };
       if(bool === 0){
     return (
      <React.Fragment>
@@ -51,9 +62,9 @@ function SteamLogin() {
           You have typed an invalid URL 
           </Alert> 
         </Snackbar>
-      <div style={{display: 'flex',  justifyContent:'center', alignItems:'center', backgroundSize: 'cover', overflowY: 'scroll', height:'100vh', backgroundColor:'#85DCBA',}}>
+      <div style={{display: 'flex',  justifyContent:'center', alignItems:'center', backgroundSize: 'cover', overflowY: 'scroll', height:'100vh', backgroundColor:'#85DCBA',fontSize:'8vw'}}>
     
-              <TextField label='Steam Account ID' placeholder="http://steamcommunity.com/id/Chujji" variant='standard' size='medium' style={{ width:430, border: 0,outline:'none',boxShadow: 'none',}} autoComplete='off' inputRef={steamURL} />
+              <TextField label='Steam Account ID' placeholder="http://steamcommunity.com/id/Chujji" variant='standard' size='medium' style={{  border: 0,outline:'none',boxShadow: 'none',}} autoComplete='off' inputRef={steamURL} />
               <Button variant="outlined" size='medium' style={{borderRadius:100, height:55 }} onClick={handleSubmit}>CALCULATE</Button>
       </div>  
       </React.Fragment>
@@ -61,7 +72,7 @@ function SteamLogin() {
   }else if (bool === 1){
     return (
       <div style={{display: 'flex',  justifyContent:'center', alignItems:'center', backgroundSize: 'cover', overflowY: 'scroll',height:'100vh', backgroundColor:'#85DCBA' }}> 
-        <img src='https://i.imgur.com/muRT0BS.gif' style={{width:100,height:100}}></img>
+      <CircularProgress />
     </div>  
     ); 
   }else if(bool===2){
@@ -69,22 +80,37 @@ function SteamLogin() {
     for(let i=0;i<apiReq.length;i++){
       totalPlayTime+=apiReq[i].playTime
       totalTimeToBeat+=apiReq[i].howLong 
+      var howLongStr = ''; 
+      var extraStr = '' 
+      var completeStr = ''; 
+   //   if(apiReq[i].howLong>0){
+      var howLongStr ='  Main: '+apiReq[i].howLong+' hours'
+     // }if(apiReq[i].howLong>0){
+      var howLongStr ='  Main: '+apiReq[i].howLong+' hours'
+ //     }
+   //   if(apiReq[i].howLongPlus>0){
+        var extraStr ='  +Extra: '+apiReq[i].howLongPlus+' hours'
+     //   }
+    //  if(apiReq[i].howLongPlus>0){
+          var completeStr = '  Complete: '+apiReq[i].howLongComplete+' hours'
+      //    }
       gameCards.push( 
         <div style={{display:'flex', justifyContent:'center', alignItems:'center', marginBottom:'20px', marginTop:'20px'}}>
-      <Card style={{backgroundColor:'#424242'}}>
-        <CardContent>
-          <Typography style={{textAlign:'center', color:'white'}}>
-              {apiReq[i].name}
-              <br/>
-              Playtime: {apiReq[i].playTime} hours 
-              <br/>
-              HLTB Main: {apiReq[i].howLong} hours
-              <br/>
-              HLTB Main+Extra: {apiReq[i].howLongPlus} hours
-              <br/> 
-              HLTB Completionist: {apiReq[i].howLongComplete} hours
+      <Card style={{backgroundColor:'#467361', borderRadius:25, }}>
+        <CardContent style={{}}>
+          <Typography style={{textAlign:'center', color:'white', maxWidth:300}} component='div' variant='title' sx={{fontSize:30}}>
+              <strong>{apiReq[i].name}</strong>
           </Typography>
-              <img src={JSON.stringify(apiReq[i].image).substring(1,JSON.stringify(apiReq[i].image).length-1)}style={{width:300, height:450}}></img>
+          <Typography component='div'style={{textAlign:'center', color:'white' }} variant='subtitle1'sx={{fontSize:15}} >
+          Playtime: {apiReq[i].playTime} hours 
+              <br/>
+              {howLongStr} 
+              <br/>
+              {extraStr} 
+              <br/> 
+              {completeStr}
+          </Typography>
+              <CardMedia component='img' image={JSON.stringify(apiReq[i].image).substring(1,JSON.stringify(apiReq[i].image).length-1)}style={{width:300, height:450, overflow:'hidden'}}/>
         </CardContent>
       </Card>
     
@@ -93,14 +119,14 @@ function SteamLogin() {
     } 
     return(
       <React.Fragment>
-         <Snackbar autoHideDuration={6000} onClose={handleClose} open={true} anchorOrigin={{horizontal:'left', vertical:'top'}} severity='info'>
-        <Alert onClose={handleClose} sx={{ width: '100%' }} severity='info'  >
+         <Snackbar autoHideDuration={6000} onClose={handleClose2} open={open2} anchorOrigin={{horizontal:'left', vertical:'top'}} severity='info'>
+        <Alert onClose={handleClose2} sx={{ width: '100%' }} severity='info'  >
           You've played {totalPlayTime} hours of games!  
           To beat all your games it would take {totalTimeToBeat} hours! 
           </Alert> 
         </Snackbar>
-      <div style={{display: 'block',  justifyContent:'center', alignItems:'center', backgroundSize: 'cover', overflowY: 'scroll', backgroundColor:'#85DCBA'}}>
-       
+      <div style={{display: 'block',  justifyContent:'center', alignItems:'center', backgroundSize: 'cover', overflowY: 'hidden', backgroundColor:'#85DCBA'}}>
+       {console.log(apiReq)}
        {gameCards}; 
        </div> 
        </React.Fragment>
