@@ -8,8 +8,6 @@ var router=express.Router();
 // });
 router.post("/", async function(req,res){
    var steamURL = JSON.parse(JSON.stringify(req.body.STEAMURL))
-   console.log(steamURL)
-   console.log(steamURL.substring(0,29)) 
    if(steamURL.includes("http://steamcommunity.com/id/") || steamURL.includes("https://steamcommunity.com/id") || steamURL.includes("https://steamcommunity.com/profiles/")){
    data = await getData(steamURL);
    console.log("swag")
@@ -38,13 +36,14 @@ module.exports=router;
         hltbGame = await hltbService.search(gameList[i].name)
         console.log(hltbGame.length) 
         if(hltbGame.length!=0){
-            gameItemArray.push(new game(hltbGame[0].name,Math.round(gameList[i].playTime/60),hltbGame[0].gameplayMain,hltbGame[0].gameplayMainExtra,hltbGame[0].gameCompletionist,"http://howlongtobeat.com"+hltbGame[0].imageUrl))
+            console.log(hltbGame[0].gameplayCompletionist)
+            gameItemArray.push(new game(hltbGame[0].name,Math.round(gameList[i].playTime/60),hltbGame[0].gameplayMain,hltbGame[0].gameplayMainExtra,hltbGame[0].gameplayCompletionist,"http://howlongtobeat.com"+hltbGame[0].imageUrl))
         }
         //if(gameItemArray.length>=25){
           //  break; 
         }
      
-    console.log(gameItemArray[0].image)
+    // console.log(gameItemArray[0].gameCompletionist)
     return gameItemArray
 }
 
