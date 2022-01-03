@@ -42,8 +42,9 @@ const [bool,setBool] = useState(0)
     ); 
   }else if(bool===2){
     var indents = [];
-    for(let i=0;i<5;i++){
+    for(let i=0;i<apiReq.length;i++){
       indents.push( 
+        <div>
       <Card>
         <CardContent>
           <Typography>
@@ -57,14 +58,18 @@ const [bool,setBool] = useState(0)
               <img src={JSON.stringify(apiReq[i].image).substring(1,JSON.stringify(apiReq[i].image).length-1)}style={{width:300, height:450}}></img>
         </CardContent>
       </Card>
+
+      </div>
     )
+    }
     console.log(indents) 
     return(
       <div style={{display: 'flex',  justifyContent:'center', alignItems:'center', backgroundSize: 'cover', overflowY: 'scroll', backgroundColor:'#85DCBA'}}>
        {indents}; 
+       {console.log(indents.length)}
        </div> 
     )
-  }
+  
 }
 }
   export default SteamLogin; 
