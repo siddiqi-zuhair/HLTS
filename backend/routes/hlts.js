@@ -24,16 +24,16 @@ module.exports=router;
     const steam = new SteamAPI(apiKey);
     var steamid = await steam.resolve(steamURL) 
     gameList = await steam.getUserOwnedGames(steamid)
+    userSum = await steam.getUserSummary(steamid); 
+    pfp = userSum.avatar.large
+    nick = userSum.nickname  
     gameItemArray = [] 
     hltbGame = [] 
     for(let i=0;i<gameList.length;i++){
         gameName = gameList[i].name.replace(/[^\w\s]/gi, ' ')
-        console.log(gameName) 
         hltbGame = await hltbService.search(gameName)
-        
         if(hltbGame.length>0){
-            console.log(gameName)     
-            gameItemArray.push(new game(gameList[i].name,Math.round(gameList[i].playTime/60),hltbGame[0].gameplayMain,hltbGame[0].gameplayMainExtra,hltbGame[0].gameplayCompletionist,"http://howlongtobeat.com"+hltbGame[0].imageUrl))
+            gameItemArray.push(new game(nick,pfp,gameList[i].name,Math.round(gameList[i].playTime/60),hltbGame[0].gameplayMain,hltbGame[0].gameplayMainExtra,hltbGame[0].gameplayCompletionist,"http://howlongtobeat.com"+hltbGame[0].imageUrl,gameList[i].appID))
         }
         console.log(i+1 + "/"+gameList.length) 
         //if(gameItemArray.length>=25){
@@ -43,12 +43,15 @@ module.exports=router;
     return gameItemArray
 }
 
-function game(name,playTime,howLong,howLongPlus,howLongComplete,image){ 
+function game(userName, userPfp, name,playTime,howLong,howLongPlus,howLongComplete,image,appid){ 
+    this.userName = userName 
+    this.userPfp = userPfp 
     this.name=name
     this.playTime = playTime
     this.howLong = howLong
     this.howLongPlus = howLongPlus 
     this.howLongComplete = howLongComplete
     this.image = image
+    this.appid = appid 
   //  this.currentPlayers = currentPlayers
 }
