@@ -10,6 +10,7 @@ import { Alert } from '@mui/material';
 import { Snackbar } from '@mui/material';
 import { CircularProgress } from '@mui/material';
 import './App.css';
+import { Grid } from '@mui/material';
 
 
 function SteamLogin() {
@@ -96,10 +97,10 @@ function SteamLogin() {
           var completeStr = '  Complete: '+apiReq[i].howLongComplete+' hours'
       //    }
       gameCards.push( 
-        <div style={{display:'flex', justifyContent:'center', alignItems:'center', marginBottom:'20px', marginTop:'20px', fontFamily:'Ubuntu'}}>
-      <Card style={{backgroundColor:'#467361', borderRadius:25, maxHeight:625, marginLeft:'auto', marginRight:'auto' }}>
+        <Grid  style={{ alignItems:'center', paddingTop:20, fontFamily:'Ubuntu',margin:'auto'}}>
+      <Card style={{backgroundColor:'#467361', borderRadius:25, maxHeight:625, maxWidth:350, marginRight:'auto' }}>
         <CardContent style={{}}>
-          <Typography style={{textAlign:'center', color:'white', maxWidth:300}} component='div' variant='title' sx={{fontSize:27, fontWeight:'bold'}}>
+          <Typography style={{textAlign:'center', color:'white', maxWidth:300}} component='div' variant='title' sx={{fontSize:'2vh', fontWeight:'bold'}}>
               <strong>{apiReq[i].name}</strong>
           </Typography>
           <Typography component='div'style={{textAlign:'center', color:'white' }} variant='subtitle1'sx={{fontSize:14}} >
@@ -115,20 +116,21 @@ function SteamLogin() {
         </CardContent>
       </Card>
     
-      </div>
+      </Grid>
     )
     } 
     return(
       <React.Fragment>
          <Snackbar onClose={handleClose2} open={open2} anchorOrigin={{horizontal:'left', vertical:'top'}} severity='info'>
         <Alert onClose={handleClose2} sx={{ width: '100%' }} severity='info'  >
-          You've played {totalPlayTime} hours of games!  
-          To beat all your games it would take {totalTimeToBeat} hours! 
+          You've played {totalPlayTime} hours or {Math.round(totalPlayTime/24)} days of games!  
+          <br /> 
+          To beat all your games it would take {totalTimeToBeat} hours or {Math.round(totalTimeToBeat/24)} days! 
           </Alert> 
         </Snackbar>
-      <div style={{display: 'block',  justifyContent:'center', alignItems:'center', backgroundSize: 'cover', overflowY: 'hidden', backgroundColor:'#85DCBA'}}>
+      <div style={{backgroundColor:'#85DCBA',alighnItems:'center', display:'flex', flexDirection:'row', flexWrap:'wrap', justifyContent:'center',alignItems:'center', margin:'auto', paddingLeft:15,paddingRight:15}}>
        {console.log(apiReq)}
-       {gameCards}; 
+       {gameCards}
        </div> 
        </React.Fragment>
 
