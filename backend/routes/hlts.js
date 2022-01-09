@@ -7,10 +7,9 @@ const SteamAPI = require('steamapi');
 const Mongoose = require('mongoose') 
 const GameData = require('./HowLongData');
 require('dotenv').config()
-// router.get("/", async function(req,res){ 
-//     sendArr = await getData() 
-//     res.send(sendArr);
-// });
+ router.get("/", async function(req,res){  
+     res.send('worked!');
+ });
 router.post("/", async function(req,res){
    var steamURL = JSON.parse(JSON.stringify(req.body.STEAMURL))
    if(steamURL.includes("http://steamcommunity.com/id/") || steamURL.includes("https://steamcommunity.com/id") || steamURL.includes("https://steamcommunity.com/profiles/")){
