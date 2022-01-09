@@ -12,7 +12,7 @@ import LoadingScreen from './LoadingScreen.js'
  
 function SteamLogin() {
     var steamURL = React.useRef(null);
-    const url = 'http://99.228.118.110:9000/hlts';
+    const url = 'http://localhost:9000/hlts';
     var axios = Axios;
   const [open, setOpen] = React.useState(false);
 
@@ -51,7 +51,7 @@ function SteamLogin() {
           You have typed an invalid URL 
           </Alert> 
         </Snackbar>
-      <div className='SteamLogin'>          
+      <div className='SteamLogin' style={{overflow:'hidden'}}>          
               <TextField label='Steam Account URL'  variant='standard' autoComplete='off' inputRef={steamURL} />
               <Button variant="outlined" size='medium' style={{  borderRadius: 100, height:55}} onClick={handleSubmit}>CALCULATE</Button>
       </div>  
