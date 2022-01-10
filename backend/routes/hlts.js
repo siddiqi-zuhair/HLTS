@@ -12,6 +12,7 @@ require('dotenv').config()
  });
 router.post("/", async function(req,res){
    var steamURL = JSON.parse(JSON.stringify(req.body.STEAMURL))
+   console.log('posted')
    if(steamURL.includes("http://steamcommunity.com/id/") || steamURL.includes("https://steamcommunity.com/id") || steamURL.includes("https://steamcommunity.com/profiles/")){
    data = await getData(steamURL);
    }else{
@@ -22,13 +23,11 @@ router.post("/", async function(req,res){
 module.exports=router; 
 
 async function getData(steamURL){ 
-    console.log(process.env) 
     var startTime = performance.now()
     console.log(process.env.MONG_USER)
     console.log(process.env.MONG_PASS)
     const dbURI = "mongodb+srv://"+process.env.MONG_USER+":"+process.env.MONG_PASS+"@hltsdb.czih2.mongodb.net/HowLongData?retryWrites=true&w=majority";
     try{ 
-        console.log(dbURI) 
         await Mongoose.connect(dbURI, {useNewURlParser:true,useUnifiedTopology:true})
         console.log('connected to MongoDB ')
     }catch (err){ 
@@ -50,7 +49,6 @@ async function getData(steamURL){
         gameName = gameList[i].name.replace(/[^\w\s]/gi, ' ').trim() 
         gameName = gameName.replace(/\s+/g, ' ').trim()
         dbIndex = dbList.findIndex(x => x.name === gameName)   
-        console.log(dbIndex) 
         if(dbIndex===-1){
             console.log(gameName)
            hltbGame = await hltbService.search(gameName)
