@@ -6,8 +6,7 @@ React web app that shows how long it takes to complete your Steam library
 
 ## Demo
 
-Insert gif or link to demo
-
+https://howlongtosteam.netlify.app/
 
 ## Screenshots
 Main Page 
