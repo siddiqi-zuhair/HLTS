@@ -18,6 +18,15 @@ Game Display Page
 
 Clone the project:
 
+By default frontend is hosted on 
+```bash
+PORT: 3000
+```
+and backend is hosted on 
+```bash
+PORT: 9000
+```
+
 For frontend: 
 
 ```bash
