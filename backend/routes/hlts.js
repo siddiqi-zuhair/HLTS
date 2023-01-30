@@ -31,6 +31,7 @@ async function getData(steamURL){
         await Mongoose.connect(dbURI, {useNewURlParser:true,useUnifiedTopology:true})
         console.log('connected to MongoDB ')
     }catch (err){ 
+        console.log(err)
         console.log('failed to connect')
     }
     
