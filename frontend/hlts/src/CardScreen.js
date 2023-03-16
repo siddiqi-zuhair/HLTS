@@ -12,7 +12,6 @@ var totalPlayTime = 0;
 var totalTimeToBeat=0; 
 var apiReq = props.apiReq; 
 var gameCards = []; 
-var searchTerm = React.createRef('');
 const [open, setOpen] = React.useState(true);
 const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
