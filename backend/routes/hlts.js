@@ -54,7 +54,7 @@ async function getData(steamURL){
             console.log(gameName)
            hltbGame = await hltbService.search(gameName)
            if(hltbGame.length!=0){
-               gameItemArray.push(new game(pfp,nick,gameList[i].name,Math.round(gameList[i].playTime/60),hltbGame[0].gameplayMain,hltbGame[0].gameplayMainExtra,hltbGame[0].gameplayCompletionist,"http://howlongtobeat.com"+hltbGame[0].imageUrl,gameList[i].appID))
+               gameItemArray.push(new game(pfp,nick,gameList[i].name,Math.round(gameList[i].playTime/60),hltbGame[0].gameplayMain,hltbGame[0].gameplayMainExtra,hltbGame[0].gameplayCompletionist,hltbGame[0].imageUrl,gameList[i].appID))
                const gameData = new GameData({
                 name: gameName,
                 howLong: hltbGame[0].gameplayMain,
@@ -67,7 +67,7 @@ async function getData(steamURL){
            console.log(res)   
             }
         }else{ 
-            gameItemArray.push(new game(pfp,nick,gameList[i].name,Math.round(gameList[i].playTime/60),dbList[dbIndex].howLong,dbList[dbIndex].howLongPlus,dbList[dbIndex].howLongComplete,"http://howlongtobeat.com"+dbList[dbIndex].image,dbList[dbIndex].appid))
+            gameItemArray.push(new game(pfp,nick,gameList[i].name,Math.round(gameList[i].playTime/60),dbList[dbIndex].howLong,dbList[dbIndex].howLongPlus,dbList[dbIndex].howLongComplete,dbList[dbIndex].image,dbList[dbIndex].appid))
         }
            console.log(i+1 + "/"+gameList.length) 
            //if(gameItemArray.length>=25){
